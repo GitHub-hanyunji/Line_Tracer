@@ -8,8 +8,7 @@ publish하고 dxl_nano에서 실제로 바퀴 구동하는 프로그램
 - jetson 코드는 나중에 첨부하도록 하겠습니다.
 
 ### sub 설명
-camera frame subscrive하여 error으로 좌/우 바퀴 속도 계산해 jetson dxl_nano에 publish
-
+- camera frame subscrive하여 error으로 좌/우 바퀴 속도 계산해 jetson dxl_nano에 publish
 README: https://github.com/GitHub-hanyunji/Line_Tracer/blob/main/wsl/README.md
 
 ### 결과영상 youtube
