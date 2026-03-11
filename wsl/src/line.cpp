@@ -169,7 +169,7 @@ LineDetectNode::LineDetectNode() : Node("linedetect_wsl")
     auto qos = rclcpp::QoS(rclcpp::KeepLast(10));   // qos
     auto fn=std::bind(&LineDetectNode::line_callback, this, std::placeholders::_1);
     sub = this->create_subscription<sensor_msgs::msg::CompressedImage>("/image/compressed_13",qos,fn);
-    pub_ = this->create_publisher<geometry_msgs::msg::Vector3>("dxl/line",qos);
+    pub_ = this->create_publisher<geometry_msgs::msg::Vector3>("topic_dxlpub",qos);
 
     width = 640;
     height = 360;
@@ -205,16 +205,15 @@ void LineDetectNode::line_callback(const sensor_msgs::msg::CompressedImage::Shar
     Draw(roi, stats, centroids, stats.rows, idx, p_center);
 
     int center_x = width / 2;
-    // 위치오차 계산
+    // 위치오차 계산 ->  error: 라인에서 로봇이 얼마나 떨어져있는지
     // 화면 중앙- 현재 라인의 무게중심 X 좌표
-    // error < 0 => 오른쪽으로 치우침, error > 0 => 왼쪽으로 치우침
+    // error < 0 =>왼쪽으로 치우침, error > 0 => 오른쪽으로 치우침
     int error = center_x - p_center.x;
     
-    //프레임 처리 시간을 초 단위로 변환
-    auto end = std::chrono::steady_clock::now();
-    float t = std::chrono::duration<float,std::milli>(end - start).count();
+    
 
     // 좌/우 속도계산
+    // 양족 속도명령을 동일하게
     float leftvel = 100 - k* error;
     float rightvel = -(100 + k* error);
     
@@ -232,7 +231,7 @@ void LineDetectNode::line_callback(const sensor_msgs::msg::CompressedImage::Shar
             mode=true;
             int fourcc = cv::VideoWriter::fourcc('m','p','4','v');
             double fps = 30.0;  // 원하는 FPS로 설정해도 됨
-            writer.open("sllidar.mp4", fourcc, fps,
+            writer.open("line_tracer.mp4", fourcc, fps,
                         cv::Size(frame.cols, frame.rows), true);
             if (!writer.isOpened()) {
                 printf("VideoWriter 열기 실패\n");
@@ -255,10 +254,15 @@ void LineDetectNode::line_callback(const sensor_msgs::msg::CompressedImage::Shar
         vel_msg.z = 0.0; // 필요 없으면 0
     }
     pub_->publish(vel_msg);  // 속도값 publish
-    RCLCPP_INFO(this->get_logger(), "err:%d lvel:%f rvel:%f time:%f", error,vel_msg.x,vel_msg.y, t);
+    
     cv::imshow("frame", frame);  // 원본
     cv::imshow("Track", roi);    // ROI
     cv::waitKey(1);
+
+    //프레임 처리 시간을 ms 단위로 변환
+    auto end = std::chrono::steady_clock::now();
+    float t = std::chrono::duration<float,std::milli>(end - start).count();
+    RCLCPP_INFO(this->get_logger(), "err:%d lvel:%f rvel:%f time:%f", error,vel_msg.x,vel_msg.y, t);
 
 }
 
