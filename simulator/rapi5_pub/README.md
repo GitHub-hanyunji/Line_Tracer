@@ -1,7 +1,7 @@
-## jetson Pub
+## rapi5 Pub
 ### 작성자: 2301510 한윤지
 
-jetson에서 영상 파일을 읽어서 ROS2 토픽(/image/compressed_13)으로 계속 퍼블리시하는 노드
+rapi5에서 영상 파일을 읽어서 ROS2 토픽(/image/compressed_13)으로 계속 퍼블리시하는 노드
 
 #### 1. Node 생성자
 비디오 파일을 열고, ROS2 퍼블리셔를 생성한뒤, 30ms 주기로 publish_frame()을 실행해 영상을 토픽으로 계속 전송하는 역할을 한다.
