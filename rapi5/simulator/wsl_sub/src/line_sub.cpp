@@ -126,7 +126,7 @@ LineDetectNode::LineDetectNode() : Node("linedetect_wsl")
     sub = this->create_subscription<sensor_msgs::msg::CompressedImage>("/image/compressed_13",qos,fn);
 
     width = 640;
-    height = 360;
+    height = 480;  // rapi5의 카메라 크기는 640 x 480
     // ROI 중앙
     p_center = cv::Point(width / 2, (height / 4) / 2);
 
