@@ -4,10 +4,10 @@ rapi5_pub 패키지로 rapi5에서 비디오 frame publish 하고 wsl_sub패키�
 
 * 각 패키지에 대한 자세한 설명은 각 패키지 폴더 아래 README.md 파일로 자세히 작성하였습니다.
 ### pub 설명
-https://github.com/GitHub-hanyunji/Line_Tracer/blob/main/simulator/rapi5_pub/README.md
+https://github.com/GitHub-hanyunji/Line_Tracer/tree/main/rapi5/simulator/rapi5_pub
 
 ### sub 설명
-https://github.com/GitHub-hanyunji/Line_Tracer/edit/main/simulator/wsl_sub/README.md
+https://github.com/GitHub-hanyunji/Line_Tracer/tree/main/rapi5/simulator/wsl_sub
 
 ### 결과영상 youtube
 
