@@ -10,9 +10,4 @@ https://github.com/GitHub-hanyunji/Line_Tracer/tree/main/rapi5/simulator/rapi5_p
 https://github.com/GitHub-hanyunji/Line_Tracer/tree/main/rapi5/simulator/wsl_sub
 
 ### 결과영상 youtube
-
-#### 5 lt cw 100rpm out line tracer
-https://www.youtube.com/watch?v=TSo5tUpLH4w
-
-#### 7 lt ccw 100rpm in line tracer
-https://www.youtube.com/watch?v=4Qtjuw3VRv4
+[![Line Tracer Robot](https://img.youtube.com/vi/MaP-0MkbB3g/0.jpg)](https://www.youtube.com/watch?v=MaP-0MkbB3g)
